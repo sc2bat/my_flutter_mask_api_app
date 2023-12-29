@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_mask_api_app/screen/my_home_page.dart';
+import 'package:my_flutter_mask_api_app/ui/view/main_page.dart';
+import 'package:my_flutter_mask_api_app/viewModel/store_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider.value(
+      value: StoreModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Mask API'),
+      home: const MainPage(title: 'Flutter Mask API'),
     );
   }
 }
