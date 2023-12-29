@@ -64,7 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _isLoading
           ? loadingWidget()
           : ListView(
-              children: stores.map((e) {
+              children: stores
+                  .where((element) => element.remainStat == 'few')
+                  .map((e) {
                 return ListTile(
                   title: Text(e.name),
                   subtitle: Text(e.addr),
