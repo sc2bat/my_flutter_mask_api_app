@@ -1,39 +1,40 @@
 class StoreModel {
-  String? addr;
-  String? code;
-  String? createdAt;
-  num? lat;
-  num? lng;
-  String? name;
-  String? remainStat;
-  String? stockAt;
-  String? type;
-
-  StoreModel(
-      {this.addr,
-      this.code,
-      this.createdAt,
-      this.lat,
-      this.lng,
-      this.name,
-      this.remainStat,
-      this.stockAt,
-      this.type});
+  StoreModel({
+    required this.addr,
+    required this.code,
+    required this.createdAt,
+    required this.lat,
+    required this.lng,
+    required this.name,
+    required this.remainStat,
+    required this.stockAt,
+    required this.type,
+  });
+  late final String addr;
+  late final String code;
+  late final String createdAt;
+  late final double lat;
+  late final double lng;
+  late final String name;
+  late final String remainStat;
+  late final String stockAt;
+  late final String type;
+  late double km;
 
   StoreModel.fromJson(Map<String, dynamic> json) {
-    addr = json['addr'];
-    code = json['code'];
-    createdAt = json['created_at'];
-    lat = json['lat'];
-    lng = json['lng'];
-    name = json['name'];
-    remainStat = json['remain_stat'];
-    stockAt = json['stock_at'];
-    type = json['type'];
+    addr = json['addr'] ?? '';
+    code = json['code'] ?? '';
+    createdAt = json['created_at'] ?? '';
+    lat = json['lat'] ?? 0;
+    lng = json['lng'] ?? 0;
+    name = json['name'] ?? '';
+    remainStat = json['remain_stat'] ?? '';
+    stockAt = json['stock_at'] ?? '';
+    type = json['type'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['addr'] = addr;
     data['code'] = code;
     data['created_at'] = createdAt;
