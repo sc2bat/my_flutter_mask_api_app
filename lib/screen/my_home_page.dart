@@ -1,9 +1,5 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:my_flutter_mask_api_app/logger/logger.dart';
-import 'package:my_flutter_mask_api_app/model/store_model.dart';
+import 'package:my_flutter_mask_api_app/model/store.dart';
 import 'package:my_flutter_mask_api_app/repository/store_repository.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -16,7 +12,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<StoreModel> stores = [];
+  List<Store> stores = [];
 
   bool _isLoading = true;
 
@@ -81,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildRemainStatWidget(StoreModel store) {
+  Widget _buildRemainStatWidget(Store store) {
     var remainStat = '판매중지';
     var description = '';
     var color = Colors.black;

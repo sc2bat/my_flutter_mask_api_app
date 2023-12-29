@@ -1,5 +1,5 @@
-class StoreModel {
-  StoreModel({
+class Store {
+  Store({
     required this.addr,
     required this.code,
     required this.createdAt,
@@ -21,7 +21,7 @@ class StoreModel {
   late final String type;
   late double km;
 
-  StoreModel.fromJson(Map<String, dynamic> json) {
+  Store.fromJson(Map<String, dynamic> json) {
     addr = json['addr'] ?? '';
     code = json['code'] ?? '';
     createdAt = json['created_at'] ?? '';
