@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_flutter_mask_api_app/logger/logger.dart';
 import 'package:my_flutter_mask_api_app/model/store_model.dart';
+import 'package:my_flutter_mask_api_app/repository/store_repository.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -15,33 +16,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<StoreModel> stores = [];
+  List<StoreModel> stores = [];
 
   bool _isLoading = true;
 
-  Future fetch() async {
-    _isLoading = true;
-    var url =
-        'https://gist.githubusercontent.com/junsuk5/bb7485d5f70974deee920b8f0cd1e2f0/raw/063f64d9b343120c2cb01a6555cf9b38761b1d94/sample.json';
-    final response = await http.get(Uri.parse(url));
-    final jsonStores = jsonDecode(utf8.decode(response.bodyBytes))['stores'];
-    setState(() {
-      stores.clear();
+  final storeRepository = StoreRepository();
 
-      jsonStores.forEach((e) {
-        stores.add(StoreModel.fromJson(e));
+  void getStores() {
+    storeRepository.fetch().then((value) {
+      setState(() {
+        stores = value;
+        _isLoading = false;
       });
-      _isLoading = false;
     });
-    logger.info('qwerasdf fetch');
-    logger.info('qwerasdf loading $_isLoading');
   }
 
   @override
   void initState() {
     super.initState();
-    fetch();
-    logger.info('qwerasdf init done');
+    getStores();
   }
 
   @override
@@ -54,9 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () {
-              logger.info('qwerasdf press button');
-              fetch();
-              logger.info('qwerasdf press button');
+              getStores();
             },
           ),
         ],
@@ -65,7 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ? loadingWidget()
           : ListView(
               children: stores
-                  .where((element) => element.remainStat == 'few')
+                  .where((element) =>
+                      element.remainStat == 'few' ||
+                      element.remainStat == 'some')
                   .map((e) {
                 return ListTile(
                   title: Text(e.name),
