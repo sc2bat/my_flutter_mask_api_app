@@ -1,4 +1,4 @@
-package com.example.my_flutter_mask_api_app
+package com.demo.mask
 
 import io.flutter.embedding.android.FlutterActivity
 
