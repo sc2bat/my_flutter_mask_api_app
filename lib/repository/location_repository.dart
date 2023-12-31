@@ -6,10 +6,15 @@ class LocationRepository {
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
 
   Future<Position> getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    return position;
+    bool isPermission = await handlePermission();
+    // _getCurrentPosition();
+    if (isPermission) {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      return position;
+    } else {
+      return Future.error('Location services are disabled.');
+    }
   }
 
   Future<bool> handlePermission() async {
