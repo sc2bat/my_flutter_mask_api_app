@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:my_flutter_mask_api_app/logger/logger.dart';
 import 'package:my_flutter_mask_api_app/model/store.dart';
 
 class RemainStatWidget extends StatelessWidget {
@@ -11,7 +12,14 @@ class RemainStatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildRemainStatWidget(store);
+    return ListTile(
+      title: Text(store.name),
+      subtitle: Text(store.addr),
+      trailing: _buildRemainStatWidget(store),
+      onTap: () {
+        logger.info('qwerasdf taptap');
+      },
+    );
   }
 }
 
