@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:my_flutter_mask_api_app/model/store.dart';
 
 class StoreRepository {
-  Future<List<Store>> fetch() async {
+  Future<List<Store>> fetch(double latitude, double longitude) async {
     List<Store> stores = [];
     var url =
         'https://gist.githubusercontent.com/junsuk5/bb7485d5f70974deee920b8f0cd1e2f0/raw/063f64d9b343120c2cb01a6555cf9b38761b1d94/sample.json';
