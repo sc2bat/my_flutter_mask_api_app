@@ -4,7 +4,7 @@ import 'package:my_flutter_mask_api_app/viewModel/store_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ChangeNotifierProvider.value(
       value: StoreModel(),
