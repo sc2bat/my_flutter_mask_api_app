@@ -4,11 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_flutter_mask_api_app/logger/logger.dart';
 import 'package:my_flutter_mask_api_app/model/store.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RemainStatWidget extends StatelessWidget {
   final Store store;
 
   const RemainStatWidget({super.key, required this.store});
+
+  Future<void> _launchUrl(double latitude, double longitude) async {
+    final Uri _url = Uri.parse(
+        'https://www.google.co.kr/maps/search/?api=1&query=$latitude,$longitude');
+    logger.info('qwerasdf $_url');
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +28,7 @@ class RemainStatWidget extends StatelessWidget {
       trailing: _buildRemainStatWidget(store),
       onTap: () {
         logger.info('qwerasdf taptap');
+        _launchUrl(store.lat, store.lng);
       },
     );
   }
