@@ -24,7 +24,13 @@ class RemainStatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(store.name),
-      subtitle: Text(store.addr),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(store.addr),
+          Text('${store.km} km'),
+        ],
+      ),
       trailing: _buildRemainStatWidget(store),
       onTap: () {
         logger.info('qwerasdf taptap');

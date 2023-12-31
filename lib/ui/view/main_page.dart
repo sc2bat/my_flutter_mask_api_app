@@ -24,15 +24,25 @@ class MainPage extends StatelessWidget {
           ),
         ],
       ),
-      body: storeModel.isLoading
-          ? loadingWidget()
-          : ListView(
-              children: storeModel.stores.map(
-                (e) {
-                  return RemainStatWidget(store: e);
-                },
-              ).toList(),
-            ),
+      body: _buildBody(storeModel),
+    );
+  }
+
+  Widget _buildBody(StoreModel storeModel) {
+    if (storeModel.isLoading) {
+      return loadingWidget();
+    }
+    if (storeModel.stores.isEmpty) {
+      return const Center(
+        child: Text('data none'),
+      );
+    }
+    return ListView(
+      children: storeModel.stores.map(
+        (e) {
+          return RemainStatWidget(store: e);
+        },
+      ).toList(),
     );
   }
 
